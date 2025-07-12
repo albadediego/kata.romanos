@@ -7,3 +7,8 @@ for c,v in diccionarios.items():
     #print(i)
     #print(diccionarios.get(i))
     print(c+"-"+str(v))
+
+
+valor = 3
+valor = "{:0<4d}".format(3)
+print(valor)

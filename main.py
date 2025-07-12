@@ -30,5 +30,38 @@ class RomanNumberError(Exception):
     pass
 
 #ingresar 1994 y retornar MCMXCIV
-def entero_a_romano():
-    return "MCMXCIV"
+def entero_a_romano(numero): #1994
+    numero = str(numero) #transformando en cadena el valor 1994
+    numero_list = list(numero) #['1','9','9','4']
+    #print(numero_list)
+    valor_romano = ''
+
+    for i in range(0, len(numero_list)): #[1000,900,90,4]
+        if i == 0:
+            numero_list[i] = int(numero_list[i])*1000 #agregar 000 al primer valor
+            valor_romano += millares.get(numero_list[i]) #buscar en el diccionario de millares el valor en romano
+        elif i == 1:
+            numero_list[i] = int(numero_list[i])*100
+            valor_romano += centenas.get(numero_list[i])
+        elif i == 2:
+            numero_list[i] = int(numero_list[i])*10
+            valor_romano += decenas.get(numero_list[i])
+        elif i == 3:
+            numero_list[i] = int(numero_list[i])*1
+            valor_romano += unidades.get(numero_list[i])
+
+
+
+    #print(numero_list)
+
+    return valor_romano
+
+print(entero_a_romano(1994))
+
+'''
+print(list('1994'))
+
+for i in '1994':
+    print(i)
+
+'''
