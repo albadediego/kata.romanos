@@ -34,10 +34,24 @@ class RomanNumberError(Exception):
 
 def romano_a_entero(romano:str)-> int:
     valor_entero = 0
-    #list_romano = list(romano) #['I', 'I', 'I']
+    list_romano = list(romano)
+
+    for pos in range(0, len(list_romano)):
+        valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
+        '''
+        if pos == 0:
+            if dic_romano_a_entero.get(list_romano[pos]) < dic_romano_a_entero.get(list_romano[pos+1]):
+                valor_entero = int(dic_romano_a_entero.get(list_romano[pos+1])) - int(dic_romano_a_entero.get(list_romano[pos]))
+            else:
+                valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
+        else:
+            valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
+        '''
+    '''
     for i in romano:
-        valor_entero += dic_romano_a_entero.get(i)
-    #print(list_romano)
+        valor_entero += dic_romano_a_entero.get(i,0)
+    '''
+
     return valor_entero 
 
 def entero_a_romano(numero:int)->str: 
