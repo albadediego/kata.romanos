@@ -30,29 +30,17 @@ dic_entero_a_romano = {
 class RomanNumberError(Exception):
     pass
 
-#ingresar 1994 y retornar MCMXCIV
-def entero_a_romano(numero): #1994
-    numero = "{:0>4d}".format(numero)
-    numero = str(numero) #transformando en cadena el valor 1994
-    '''
-    if len(numero) == 3:
-        numero = '0' + numero
-    elif len(numero) == 2:
-        numero = '00' + numero
-    elif len(numero) == 1:
-        numero = '000' + numero
-    '''
 
-    numero_list = list(numero) #['1','9','9','4']
-    #print(numero_list)
+def entero_a_romano(numero): 
+    numero = "{:0>4d}".format(numero) #transforma el numero dado a un str de 4 digitos y si es menos lo completa con ceros a la izquierda
+    numero_list = list(numero) #transformando el str dado en una lista de string por cada caracter
     valor_romano = ''
-
 
     cont = 0
     valor_num = 1000
     while cont < len(numero_list):
         numero_list[cont] = int(numero_list[cont]) * valor_num
-        valor_romano += dic_entero_a_romano.get(numero_list[cont],'') #buscar en el diccionario el valor en romano
+        valor_romano += dic_entero_a_romano.get(numero_list[cont],'')
         cont += 1
         valor_num /= 10
 
