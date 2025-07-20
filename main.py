@@ -37,22 +37,19 @@ def romano_a_entero(romano:str)-> int:
     list_romano = list(romano)
 
     for pos in range(0, len(list_romano)):
-        valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
-        '''
-        if pos == 0:
-            if dic_romano_a_entero.get(list_romano[pos]) < dic_romano_a_entero.get(list_romano[pos+1]):
-                valor_entero = int(dic_romano_a_entero.get(list_romano[pos+1])) - int(dic_romano_a_entero.get(list_romano[pos]))
+        
+        if pos!= 0: #primera
+            if dic_romano_a_entero.get(list_romano[pos-1]) < dic_romano_a_entero.get(list_romano[pos]):
+                valor_entero -= dic_romano_a_entero.get(list_romano[pos-1])
+                valor_entero += int(dic_romano_a_entero.get(list_romano[pos])) - int(dic_romano_a_entero.get(list_romano[pos-1]))
             else:
-                valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
+                valor_entero += dic_romano_a_entero.get(list_romano[pos])
         else:
-            valor_entero += dic_romano_a_entero.get(list_romano[pos],0)
-        '''
-    '''
-    for i in romano:
-        valor_entero += dic_romano_a_entero.get(i,0)
-    '''
-
+            valor_entero += dic_romano_a_entero.get(list_romano[pos])
+        
     return valor_entero 
+
+#print(romano_a_entero('XXXIV'))
 
 def entero_a_romano(numero:int)->str: 
     numero = "{:0>4d}".format(numero) #transforma el numero dado a un str de 4 digitos y si es menos lo completa con ceros a la izquierda
@@ -72,4 +69,3 @@ def entero_a_romano(numero:int)->str:
 #print(entero_a_romano(1994))
 #print(entero_a_romano(333))
 
-print(romano_a_entero('III'))
