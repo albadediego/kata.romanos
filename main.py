@@ -29,6 +29,8 @@ dic_entero_a_romano = {
 dic_romano_a_entero = {
     "I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
 
+regla_restas = {'I':('V', 'X'), 'X':('L', 'C'), 'C':('D', 'M')}
+
 class RomanNumberError(Exception):
     pass
 
@@ -38,38 +40,34 @@ def romano_a_entero(romano:str)-> int:
     cont_repes = 0
     caracter_anterior = ""
 
+    if 'DD' in romano or 'LL' in romano or 'VV' in romano:
+        raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
+
     for caracter in list_romano:
         if caracter == caracter_anterior:
+            #if caracter == 'V' or caracter == 'L' or caracter == 'D':
+            #    raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
+            
             cont_repes += 1
             if cont_repes > 2:
                 raise RomanNumberError("No se puede repetir el valor más de tres veces")
         else:
             cont_repes = 0
         
-
-        #hacer la suma y resta
         if dic_romano_a_entero.get(caracter_anterior, 0) < dic_romano_a_entero.get(caracter, 0):
+
+            if caracter_anterior and caracter not in regla_restas[caracter_anterior]:
+                raise RomanNumberError(f"{caracter_anterior} solo se puede restar de {regla_restas[caracter_anterior][0]} y {regla_restas[caracter_anterior][1]}")
+            
             valor_entero -= dic_romano_a_entero.get(caracter_anterior, 0)*2
 
         caracter_anterior = caracter
         valor_entero += dic_romano_a_entero.get(caracter, 0)
 
-
-    '''
-    for pos in range(0, len(list_romano)):
-        
-        if pos!= 0: #primera
-            if dic_romano_a_entero.get(list_romano[pos-1]) < dic_romano_a_entero.get(list_romano[pos]):
-                valor_entero -= dic_romano_a_entero.get(list_romano[pos-1])
-                valor_entero += int(dic_romano_a_entero.get(list_romano[pos])) - int(dic_romano_a_entero.get(list_romano[pos-1]))
-            else:
-                valor_entero += dic_romano_a_entero.get(list_romano[pos])
-        else:
-            valor_entero += dic_romano_a_entero.get(list_romano[pos])
-    '''
     return valor_entero 
 
-#print(romano_a_entero('IIII'))
+#print(romano_a_entero('LL'))
+#'D', 'L' y 'V' no se pueden repetir.
 
 def entero_a_romano(numero:int)->str: 
     numero = "{:0>4d}".format(numero) #transforma el numero dado a un str de 4 digitos y si es menos lo completa con ceros a la izquierda

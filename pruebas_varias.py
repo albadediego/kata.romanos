@@ -98,10 +98,24 @@ def miException():
 
 miException()
 '''
-
+'''
 from main import RomanNumberError
 
 def pruebaExcepcion():
     raise RomanNumberError("Esto es mi excepcion")
 
 pruebaExcepcion()
+'''
+
+frutas = ['fresa', 'manzana', 'pera', 'platano']
+if 'melon' in frutas:
+    print('si existe esta fruta')
+
+if 'pera' not in frutas:
+    print('si hay pera')
+
+regla_restas = {'I':('V', 'X'), 'X':('L', 'C'), 'C':('D', 'M')}
+print(regla_restas['I'][0])
+
+if 'V' in regla_restas["I"]:
+    print("no se encuentra")
