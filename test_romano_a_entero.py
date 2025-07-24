@@ -54,10 +54,25 @@ def test_romano_a_entero_restar_solo_X_LC():
     with pytest.raises(RomanNumberError) as exceptionInfo:
         romano_a_entero("XM")
     assert str(exceptionInfo.value) == "X solo se puede restar de L y C"
-    
+
 '''
 def test_romano_a_entero_restar_solo_C_DM():
     with pytest.raises(RomanNumberError) as exceptionInfo:
         romano_a_entero("XM")
     assert str(exceptionInfo.value) == "C solo se puede restar de D y M"
 '''
+
+def test_romano_a_entero_no_se_resta_V():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero("VX")
+    assert str(exceptionInfo.value) == "V, L y D nunca se pueden restar"
+
+def test_romano_a_entero_no_se_resta_L():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero("LC")
+    assert str(exceptionInfo.value) == "V, L y D nunca se pueden restar"
+
+def test_romano_a_entero_no_se_resta_D():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero("DM")
+    assert str(exceptionInfo.value) == "V, L y D nunca se pueden restar"

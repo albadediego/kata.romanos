@@ -56,6 +56,9 @@ def romano_a_entero(romano:str)-> int:
         
         if dic_romano_a_entero.get(caracter_anterior, 0) < dic_romano_a_entero.get(caracter, 0):
 
+            if caracter_anterior and caracter_anterior in 'VLD':
+                raise RomanNumberError("V, L y D nunca se pueden restar")
+            
             if caracter_anterior and caracter not in regla_restas[caracter_anterior]:
                 raise RomanNumberError(f"{caracter_anterior} solo se puede restar de {regla_restas[caracter_anterior][0]} y {regla_restas[caracter_anterior][1]}")
             
