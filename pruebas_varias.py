@@ -119,3 +119,9 @@ print(regla_restas['I'][0])
 
 if 'V' in regla_restas["I"]:
     print("no se encuentra")
+
+valor = ""
+if valor:
+    print("no esta vacio")
+else:
+    print("si esta vacio")

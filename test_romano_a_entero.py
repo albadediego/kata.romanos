@@ -76,3 +76,8 @@ def test_romano_a_entero_no_se_resta_D():
     with pytest.raises(RomanNumberError) as exceptionInfo:
         romano_a_entero("DM")
     assert str(exceptionInfo.value) == "V, L y D nunca se pueden restar"
+
+def test_romano_a_entero_no_se_resta_esp():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero("IIX")
+    assert str(exceptionInfo.value) == "I, X y C no se puede restar si hay repeticiones del mismo anteriormente"

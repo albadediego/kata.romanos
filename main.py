@@ -39,14 +39,15 @@ def romano_a_entero(romano:str)-> int:
     list_romano = list(romano)
     cont_repes = 0
     caracter_anterior = ""
-
-    if 'DD' in romano or 'LL' in romano or 'VV' in romano:
-        raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
+    caracter_ante_anterior = ""
+ 
+    #if 'DD' in romano or 'LL' in romano or 'VV' in romano:
+    #    raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
 
     for caracter in list_romano:
         if caracter == caracter_anterior:
-            #if caracter == 'V' or caracter == 'L' or caracter == 'D':
-            #    raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
+            if caracter in 'VLD':
+                raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
             
             cont_repes += 1
             if cont_repes > 2:
@@ -54,22 +55,26 @@ def romano_a_entero(romano:str)-> int:
         else:
             cont_repes = 0
         
-        if dic_romano_a_entero.get(caracter_anterior, 0) < dic_romano_a_entero.get(caracter, 0):
+        if caracter_anterior and dic_romano_a_entero.get(caracter_anterior, 0) < dic_romano_a_entero.get(caracter, 0):
 
-            if caracter_anterior and caracter_anterior in 'VLD':
+            if caracter_anterior in 'VLD':
                 raise RomanNumberError("V, L y D nunca se pueden restar")
             
-            if caracter_anterior and caracter not in regla_restas[caracter_anterior]:
+            if caracter not in regla_restas[caracter_anterior]:
                 raise RomanNumberError(f"{caracter_anterior} solo se puede restar de {regla_restas[caracter_anterior][0]} y {regla_restas[caracter_anterior][1]}")
             
             valor_entero -= dic_romano_a_entero.get(caracter_anterior, 0)*2
 
+            if (caracter_anterior == caracter_ante_anterior) and (caracter_anterior in 'IXC'):
+                raise RomanNumberError("I, X y C no se puede restar si hay repeticiones del mismo anteriormente")
+
+        caracter_ante_anterior = caracter_anterior
         caracter_anterior = caracter
         valor_entero += dic_romano_a_entero.get(caracter, 0)
 
     return valor_entero 
 
-#print(romano_a_entero('LL'))
+#print(romano_a_entero('IIX'))
 #'D', 'L' y 'V' no se pueden repetir.
 
 def entero_a_romano(numero:int)->str: 
