@@ -40,9 +40,6 @@ def romano_a_entero(romano:str)-> int:
     cont_repes = 0
     caracter_anterior = ""
     caracter_ante_anterior = ""
- 
-    #if 'DD' in romano or 'LL' in romano or 'VV' in romano:
-    #    raise RomanNumberError("Los caracteres 'D', 'L' y 'V' no se pueden repetir.")
 
     for caracter in list_romano:
         if caracter == caracter_anterior:
@@ -74,12 +71,15 @@ def romano_a_entero(romano:str)-> int:
 
     return valor_entero 
 
-#print(romano_a_entero('IIX'))
-#'D', 'L' y 'V' no se pueden repetir.
-
 def entero_a_romano(numero:int)->str: 
-    numero = "{:0>4d}".format(numero) #transforma el numero dado a un str de 4 digitos y si es menos lo completa con ceros a la izquierda
-    numero_list = list(numero) #transformando el str dado en una lista de string por cada caracter
+    if numero > 3999 or numero < 0:
+        raise RomanNumberError("El limite esta entre 0 y 3999")
+    
+    if numero == 0:
+        return ""
+
+    numero = "{:0>4d}".format(numero)
+    numero_list = list(numero)
     valor_romano = ''
 
     cont = 0
@@ -91,7 +91,3 @@ def entero_a_romano(numero:int)->str:
         valor_num /= 10
 
     return valor_romano
-
-#print(entero_a_romano(1994))
-#print(entero_a_romano(333))
-
