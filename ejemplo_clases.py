@@ -42,3 +42,5 @@ ironman.datos_persona()
 hulk = Heroe("Bruce Banner", "Nervios", "Increible")
 hulk.edad = 45
 hulk.datos()
+
+print("Pertenece?: ", isinstance(hulk,Heroe))

@@ -125,3 +125,8 @@ if valor:
     print("no esta vacio")
 else:
     print("si esta vacio")
+
+print(type("hola"==str))
+
+print(isinstance(5, int))
+print(isinstance("valor", str))
