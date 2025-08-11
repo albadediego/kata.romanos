@@ -4,11 +4,19 @@ from utils.utiles import *
 class NumeroRomano:
     def __init__(self, valor):
         self.valor = valor
-        
+        self.valor_numerico = 0
+        self.valor_romano = ""
+
         if isinstance(self.valor,str):
-           self.resultado = self.romano_a_entero(self.valor)
+           self.valor_romano = self.valor
+           self.valor_numerico = self.romano_a_entero(self.valor)
+           self.resultado = self.valor_numerico
         elif isinstance(self.valor,int):
-           self.resultado = self.entero_a_romano(self.valor)
+           self.valor_numerico = self.valor
+           self.valor_romano = self.entero_a_romano(self.valor)
+           self.resultado = self.valor_romano
+        else:
+            raise RomanNumberError("El valor debe ser cadena o entero")
 
     def entero_a_romano(self, numero:int)->str: 
         if numero > 3999 or numero < 0:
@@ -74,11 +82,19 @@ class NumeroRomano:
     
     def num_romano_entero(self):
         return self.resultado
+    
+    def __add__ (self, obj):
+        if isinstance(obj, NumeroRomano):
+            return NumeroRomano(self.valor_numerico + obj.valor_numerico)
 
+'''
 prueba1 = NumeroRomano("XXVII")
-prueba2 = NumeroRomano(15)
-prueba3 = NumeroRomano("III")
-valor = prueba1.num_romano_entero() + prueba3.num_romano_entero()
-print("La suma de prueba1 + prueba2: ", valor)
-print(prueba1)
-print(prueba2)
+print("Romano a entero: ", prueba1)
+print("Valor numerico: ", prueba1.valor_numerico)
+print("Valor romano: ", prueba1.valor_romano)
+print("------------------------------------")
+prueba2 = NumeroRomano(34)
+print("Entero a romano: ", prueba2)
+print("Valor numerico: ", prueba2.valor_numerico)
+print("Valor romano: ", prueba2.valor_romano)
+'''
